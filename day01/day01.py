@@ -3,7 +3,7 @@
 import itertools
 
 
-def day01_part1(file: str):
+def day01_part1(file: str) -> int:
     """ Solves advent of code: day01 part1 """
     with open(file) as fid:
         data = [int(line) for line in fid.readlines()]
@@ -12,7 +12,7 @@ def day01_part1(file: str):
             return n1 * n2
 
 
-def day01_part2(file: str):
+def day01_part2(file: str) -> int:
     """ Solves advent of code: day01 part2 """
     with open(file) as fid:
         data = [int(line) for line in fid.readlines()]
