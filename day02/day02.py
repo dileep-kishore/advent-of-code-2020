@@ -74,6 +74,7 @@ class Password:
 
 
 def day02(file: str, part: str) -> int:
+    """ Solves advent of code: day02 """
     with open(file) as fid:
         passwords = [Password(line) for line in fid.readlines()]
     valid_password_count = sum([password.is_valid(part) for password in passwords])
