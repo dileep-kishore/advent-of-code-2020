@@ -25,57 +25,49 @@ class Passport:
     def is_valid_datatype(value: str, field: str) -> bool:
         """ Check if value is valid for the required field """
         if field == "byr":
-            try:
-                if (int(value) < 1920) or (int(value) > 2002):
-                    return False
-            except ValueError:
+            pattern = re.compile(r"^[0-9]{4}$")
+            if not pattern.match(value):
                 return False
-            return True
+            if (int(value) < 1920) or (int(value) > 2002):
+                return False
         if field == "iyr":
-            try:
-                if (int(value) < 2010) or (int(value) > 2020):
-                    return False
-            except ValueError:
+            pattern = re.compile(r"^[0-9]{4}$")
+            if not pattern.match(value):
                 return False
-            return True
+            if (int(value) < 2010) or (int(value) > 2020):
+                return False
         if field == "eyr":
-            try:
-                if (int(value) < 2020) or (int(value) > 2030):
-                    return False
-            except ValueError:
+            pattern = re.compile(r"^[0-9]{4}$")
+            if not pattern.match(value):
                 return False
-            return True
+            if (int(value) < 2020) or (int(value) > 2030):
+                return False
         if field == "hgt":
-            if (not value.endswith("cm")) and (not value.endswith("in")):
+            pattern_in = re.compile(r"^[0-9]{2}in$")
+            pattern_cm = re.compile(r"^[0-9]{3}cm$")
+            if (not pattern_in.match(value)) and (not pattern_cm.match(value)):
                 return False
-            try:
-                if value.endswith("cm"):
-                    value = value.strip("cm")
-                    if (int(value) < 150) or (int(value) > 193):
-                        return False
-                if value.endswith("in"):
-                    value = value.strip("in")
-                    if (int(value) < 59) or (int(value) > 76):
-                        return False
-            except ValueError:
-                return False
-            return True
+            if pattern_cm.match(value):
+                value = value.strip("cm")
+                if (int(value) < 150) or (int(value) > 193):
+                    return False
+            if pattern_in.match(value):
+                value = value.strip("in")
+                if (int(value) < 59) or (int(value) > 76):
+                    return False
         if field == "hcl":
             pattern = re.compile(r"^#[0-9a-f]{6}$")
             if not pattern.match(value):
                 return False
-            return True
         if field == "ecl":
             pattern = re.compile(r"^amb$|^blu$|^brn$|^gry$|^grn$|^hzl$|^oth$")
             if not pattern.match(value):
                 return False
-            return True
         if field == "pid":
             pattern = re.compile(r"^[0-9]{9}$")
             if not pattern.match(value):
                 return False
-            return True
-        raise ValueError("None of the required fields match")
+        return True
 
     def is_valid(self, check_datatype: bool) -> bool:
         """ Check if passport is valid """
