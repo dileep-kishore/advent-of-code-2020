@@ -6,17 +6,17 @@ from typing import Iterable, List, Tuple
 
 class Forest:
     """
-        The `Forest` class
+    The `Forest` class
 
-        Parameters
-        ----------
-        forest_seed : List[str]
-            The seed pattern for the forest
+    Parameters
+    ----------
+    forest_seed : List[str]
+        The seed pattern for the forest
 
-        Attributes
-        ----------
-        forest : List[List[str]]
-            The forest
+    Attributes
+    ----------
+    forest : List[List[str]]
+        The forest
     """
 
     def __init__(self, forest_seed: List[str]) -> None:
@@ -25,17 +25,17 @@ class Forest:
 
     def build_forest(self, seed: List[str]) -> List[List[str]]:
         """
-            Build forest from the given forest seed
+        Build forest from the given forest seed
 
-            Parameters
-            ----------
-            seed : List[str]
-                The seed pattern for the forest
+        Parameters
+        ----------
+        seed : List[str]
+            The seed pattern for the forest
 
-            Returns
-            -------
-            List[Iterable]
-                The forest
+        Returns
+        -------
+        List[Iterable]
+            The forest
         """
         forest = [list(row) for row in seed]
         return forest
@@ -59,24 +59,26 @@ class Forest:
                 return False
         return True
 
-    def make_move(self, pos: Tuple[int, int], direction: str, move_value: int) -> Tuple[int, int]:
+    def make_move(
+        self, pos: Tuple[int, int], direction: str, move_value: int
+    ) -> Tuple[int, int]:
         """
-            Move in the forest in a particular direction
+        Move in the forest in a particular direction
 
-            Parameters
-            ----------
-            pos : Tuple[int, int]
-                Starting position of the move
-            direction : str
-                The direction of the move
-                Can be {"up", "down", "left", "right"}
-            move_value : int
-                The number of places to move
+        Parameters
+        ----------
+        pos : Tuple[int, int]
+            Starting position of the move
+        direction : str
+            The direction of the move
+            Can be {"up", "down", "left", "right"}
+        move_value : int
+            The number of places to move
 
-            Returns
-            -------
-            new_pos : Tuple[int, int]
-                The new position after the move
+        Returns
+        -------
+        new_pos : Tuple[int, int]
+            The new position after the move
         """
         new_pos = list(pos)
         if direction in {"left", "right"}:
@@ -91,18 +93,18 @@ class Forest:
 
     def traverse(self, pattern: List[Tuple[str, int]]) -> Iterable:
         """
-            Traverse the forest
+        Traverse the forest
 
-            Parameters
-            ----------
-            pattern : List[Tuple[str, int]]
-                The traversal pattern: [(direction, value), ...]
-                Valid directions: ['up', 'down', 'left', 'right']
+        Parameters
+        ----------
+        pattern : List[Tuple[str, int]]
+            The traversal pattern: [(direction, value), ...]
+            Valid directions: ['up', 'down', 'left', 'right']
 
-            Returns
-            -------
-            Iterable
-                (# of trees, current position)
+        Returns
+        -------
+        Iterable
+            (# of trees, current position)
         """
         num_trees = 0
         if not self.is_valid_pattern(pattern):
